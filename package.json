@@ -1,0 +1,13 @@
+{
+  "name": "estudio-de-valor-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing page de Estudio de Valor — sitio estático servido con Node (sin dependencias).",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
