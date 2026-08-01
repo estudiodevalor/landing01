@@ -27,13 +27,36 @@ const MIME = {
   '.txt':  'text/plain; charset=utf-8'
 };
 
+// Cabeceras de seguridad para todas las respuestas.
+// El framework de la página ejecuta componentes con `new Function(...)`
+// (equivalente a eval), por lo que script-src necesita 'unsafe-eval' y
+// 'unsafe-inline'; de lo contrario el sitio deja de renderizar.
+const SECURITY_HEADERS = {
+  'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'SAMEORIGIN',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'Permissions-Policy': 'geolocation=(), camera=(), microphone=(), payment=()',
+  'Content-Security-Policy': [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://unpkg.com",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "font-src 'self' blob: https://fonts.gstatic.com",
+    "img-src 'self' data: blob:",
+    "connect-src 'self' https://unpkg.com",
+    "frame-ancestors 'self'",
+    "base-uri 'self'",
+    "object-src 'none'"
+  ].join('; ')
+};
+
 // Sirve `urlPath` desde `root`, cayendo a `root/index.html` si el archivo no
 // existe (comportamiento de sitio de una sola página).
 function serveFrom(root, urlPath, res) {
   const safe = path.normalize(urlPath).replace(/^(\.\.[/\\])+/, '');
   const filePath = path.join(root, safe);
   if (!filePath.startsWith(root)) {
-    res.writeHead(403);
+    res.writeHead(403, SECURITY_HEADERS);
     res.end('Forbidden');
     return;
   }
@@ -41,14 +64,14 @@ function serveFrom(root, urlPath, res) {
   fs.readFile(filePath, (err, data) => {
     if (err) {
       fs.readFile(path.join(root, 'index.html'), (e2, d2) => {
-        if (e2) { res.writeHead(404); res.end('Not found'); return; }
-        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+        if (e2) { res.writeHead(404, SECURITY_HEADERS); res.end('Not found'); return; }
+        res.writeHead(200, { ...SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8' });
         res.end(d2);
       });
       return;
     }
     const ext = path.extname(filePath).toLowerCase();
-    res.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream' });
+    res.writeHead(200, { ...SECURITY_HEADERS, 'Content-Type': MIME[ext] || 'application/octet-stream' });
     res.end(data);
   });
 }
@@ -61,7 +84,7 @@ const server = http.createServer((req, res) => {
     // relativas del HTML de esa landing (assets/logo-cicrei.png, etc.)
     // resuelvan contra el subpath y no contra la raíz del dominio.
     if (urlPath === '/cicrei') {
-      res.writeHead(301, { Location: '/cicrei/' });
+      res.writeHead(301, { ...SECURITY_HEADERS, Location: '/cicrei/' });
       res.end();
       return;
     }
@@ -74,7 +97,7 @@ const server = http.createServer((req, res) => {
     if (urlPath === '/' || urlPath === '') urlPath = '/index.html';
     serveFrom(ROOT, urlPath, res);
   } catch (e) {
-    res.writeHead(500);
+    res.writeHead(500, SECURITY_HEADERS);
     res.end('Server error');
   }
 });
