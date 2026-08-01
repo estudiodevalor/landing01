@@ -39,11 +39,11 @@ const SECURITY_HEADERS = {
   'Permissions-Policy': 'geolocation=(), camera=(), microphone=(), payment=()',
   'Content-Security-Policy': [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://unpkg.com",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://unpkg.com https://static.cloudflareinsights.com",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' blob: https://fonts.gstatic.com",
     "img-src 'self' data: blob:",
-    "connect-src 'self' https://unpkg.com",
+    "connect-src 'self' https://unpkg.com https://cloudflareinsights.com",
     "frame-ancestors 'self'",
     "base-uri 'self'",
     "object-src 'none'"
