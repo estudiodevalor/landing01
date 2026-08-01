@@ -64,14 +64,17 @@ function serveFrom(root, urlPath, res) {
   fs.readFile(filePath, (err, data) => {
     if (err) {
       fs.readFile(path.join(root, 'index.html'), (e2, d2) => {
-        if (e2) { res.writeHead(404, SECURITY_HEADERS); res.end('Not found'); return; }
-        res.writeHead(200, { ...SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8' });
+        if (e2) { res.writeHead(404, { ...SECURITY_HEADERS, 'Cache-Control': 'no-store' }); res.end('Not found'); return; }
+        res.writeHead(200, { ...SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
         res.end(d2);
       });
       return;
     }
     const ext = path.extname(filePath).toLowerCase();
-    res.writeHead(200, { ...SECURITY_HEADERS, 'Content-Type': MIME[ext] || 'application/octet-stream' });
+    // Cache corto para HTML (siempre revalida); cache más largo para
+    // assets estáticos (imágenes, íconos, fuentes).
+    const cacheControl = ext === '.html' ? 'no-cache' : 'public, max-age=3600';
+    res.writeHead(200, { ...SECURITY_HEADERS, 'Content-Type': MIME[ext] || 'application/octet-stream', 'Cache-Control': cacheControl });
     res.end(data);
   });
 }
