@@ -404,7 +404,7 @@
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{
-  &quot;waNumber&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;52 33 5210 7384&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;WhatsApp&quot; },
+  &quot;waNumber&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;52 33 3314 1588&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;WhatsApp&quot; },
   &quot;waMessage&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;Hola, quiero agendar mi cita para conocer CICREI&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;WhatsApp&quot; },
   &quot;showStickyCta&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Móvil&quot; }
 }">
@@ -424,7 +424,7 @@ class Component extends DCLogic {
   }
 
   renderVals() {
-    const num = String(this.props.waNumber ?? '52 33 5210 7384').replace(/\D/g, '');
+    const num = String(this.props.waNumber ?? '52 33 3314 1588').replace(/\D/g, '');
     const msg = this.props.waMessage ?? 'Hola, quiero agendar mi cita para conocer CICREI';
     const wa = `https://wa.me/${num}?text=${encodeURIComponent(msg)}`;
     const vw = this.state.vw;
