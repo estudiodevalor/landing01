@@ -82,8 +82,35 @@ Al agregar cualquier analítica, píxel, chat o A/B testing, añade su dominio e
 | `img-src` | si usa píxeles de rastreo |
 
 **Ya instalado:** el tag de **Contentsquare** (`76b5ead5ae20f`) está en el `<head>` de
-`cicrei/index.html`, con `https://*.contentsquare.net` habilitado en esas tres directivas.
-Úsalo como plantilla para el siguiente.
+`cicrei/index.html`. Úsalo como plantilla para el siguiente.
+
+### Un proveedor puede usar más de un dominio
+
+Contentsquare necesita **dos**, y permitir solo uno no da error visible en la página:
+
+| Dominio | Para qué |
+|---|---|
+| `*.contentsquare.net` | el tag (`t.`), recursos (`srm.ba.`) y la recolección (`c.ba.`, `k.ba.`, `q.ba.`, `r.`, `l.`) |
+| `*.contentsquare.com` | `tcvsapi.` reporta el resultado de "Verify installation"; `app.` es el `uxaDomain` |
+
+Con solo el `.net`, el tag carga y mide bien, pero el botón **"Verify installation"** del
+panel de Contentsquare falla con *"Error reporting verification results"* — porque el
+reporte va al `.com` y la CSP lo bloquea. Costó un ciclo de depuración averiguarlo.
+
+**Cómo diagnosticar esto rápido:** descarga el script del proveedor y busca los dominios
+que menciona, en vez de adivinar:
+
+```bash
+curl -s "https://t.contentsquare.net/uxa/<TAG_ID>.js" -o tag.js
+grep -oE '[a-zA-Z0-9._-]+\.(com|net|io)' tag.js | sort -u
+```
+
+También revisa la consola del navegador: los bloqueos de CSP se reportan ahí explícitamente
+("Refused to connect to ... because it violates the following Content Security Policy").
+
+Nota aparte: `worker-src` **no** hereda de `script-src` sino de `default-src`. Si un tag
+crea Web Workers desde `blob:` (el session replay de Contentsquare lo hace), hay que
+declararlo por separado — ya está puesto.
 
 ---
 

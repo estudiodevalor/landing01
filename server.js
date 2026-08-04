@@ -31,8 +31,15 @@ const MIME = {
 // El framework de la página ejecuta componentes con `new Function(...)`
 // (equivalente a eval), por lo que script-src necesita 'unsafe-eval' y
 // 'unsafe-inline'; de lo contrario el sitio deja de renderizar.
-// Contentsquare sirve el tag desde t.contentsquare.net y envia las
-// mediciones a otros subdominios, por eso se permite *.contentsquare.net.
+// Contentsquare necesita SUS DOS dominios, no solo uno:
+//   *.contentsquare.net -> el tag (t.), los recursos (srm.ba.) y la
+//                          recoleccion de datos (c.ba., k.ba., q.ba., r., l.)
+//   *.contentsquare.com -> tcvsapi. (reporta el resultado de "Verify
+//                          installation") y app. (uxaDomain)
+// Sin el .com la verificacion falla con "Error reporting verification
+// results" aunque el tag este bien puesto y midiendo.
+// worker-src se declara aparte porque no hereda de script-src sino de
+// default-src, y el session replay crea workers desde blob:.
 const SECURITY_HEADERS = {
   'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
   'X-Content-Type-Options': 'nosniff',
@@ -41,11 +48,12 @@ const SECURITY_HEADERS = {
   'Permissions-Policy': 'geolocation=(), camera=(), microphone=(), payment=()',
   'Content-Security-Policy': [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://unpkg.com https://static.cloudflareinsights.com https://*.contentsquare.net",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://unpkg.com https://static.cloudflareinsights.com https://*.contentsquare.net https://*.contentsquare.com",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' blob: https://fonts.gstatic.com",
-    "img-src 'self' data: blob: https://*.contentsquare.net",
-    "connect-src 'self' https://unpkg.com https://cloudflareinsights.com https://*.contentsquare.net",
+    "img-src 'self' data: blob: https://*.contentsquare.net https://*.contentsquare.com",
+    "connect-src 'self' https://unpkg.com https://cloudflareinsights.com https://*.contentsquare.net https://*.contentsquare.com",
+    "worker-src 'self' blob:",
     "frame-ancestors 'self'",
     "base-uri 'self'",
     "object-src 'none'"
