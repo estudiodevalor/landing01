@@ -1,8 +1,20 @@
 # Estudio de Valor — Landing page
 
-Sitio estático (una sola página) listo para publicar en **Railway** desde **GitHub**.
-El HTML es autocontenido: la foto y las fuentes ya están incrustadas en `index.html`,
-así que no hay dependencias externas que instalar para que el sitio se vea.
+> **¿Vas a desplegar o a tocar `cicrei/`? Lee primero [DESPLIEGUE.md](DESPLIEGUE.md).**
+> Ahí está en qué servicio de Railway publica este repo, cómo verificar un cambio en
+> producción, y por qué la CSP bloquea los scripts de terceros que no estén en su lista.
+
+Sitio estático listo para publicar en **Railway** desde **GitHub**. El HTML es
+autocontenido: las imágenes y fuentes ya están incrustadas, así que no hay dependencias
+externas que instalar para que el sitio se vea.
+
+Este repo publica **dos sitios** desde un mismo servidor: la home de Estudio de Valor
+(`index.html`) y la landing de CICREI (carpeta `cicrei/`, visible en
+`www.estudiodevalor.com/cicrei`). Al cambiar uno, verifica que el otro siga bien.
+
+> Las instrucciones de "Paso 1" y "Paso 2" de más abajo son del montaje inicial de 2026 y
+> se conservan como referencia histórica: el repo y el servicio **ya existen**, no hay que
+> volver a crearlos. Para publicar un cambio hoy, ve a [DESPLIEGUE.md](DESPLIEGUE.md).
 
 ---
 
@@ -10,7 +22,9 @@ así que no hay dependencias externas que instalar para que el sitio se vea.
 
 | Archivo          | Para qué sirve                                                        |
 |------------------|----------------------------------------------------------------------|
-| `index.html`     | La landing completa, autocontenida (foto + fuentes incrustadas).     |
+| `index.html`     | La home de Estudio de Valor, autocontenida (foto + fuentes incrustadas). |
+| `cicrei/`        | La landing de Preparatoria CICREI, servida en `/cicrei`.             |
+| `DESPLIEGUE.md`  | Cómo publicar, dónde vive en Railway y la trampa de la CSP.          |
 | `server.js`      | Servidor web mínimo en Node, sin dependencias. Lee el puerto de Railway. |
 | `package.json`   | Define el comando de arranque (`npm start` → `node server.js`).      |
 | `railway.json`   | Configuración de despliegue para Railway.                            |
