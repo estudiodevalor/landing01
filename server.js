@@ -31,6 +31,8 @@ const MIME = {
 // El framework de la página ejecuta componentes con `new Function(...)`
 // (equivalente a eval), por lo que script-src necesita 'unsafe-eval' y
 // 'unsafe-inline'; de lo contrario el sitio deja de renderizar.
+// Contentsquare sirve el tag desde t.contentsquare.net y envia las
+// mediciones a otros subdominios, por eso se permite *.contentsquare.net.
 const SECURITY_HEADERS = {
   'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
   'X-Content-Type-Options': 'nosniff',
@@ -39,11 +41,11 @@ const SECURITY_HEADERS = {
   'Permissions-Policy': 'geolocation=(), camera=(), microphone=(), payment=()',
   'Content-Security-Policy': [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://unpkg.com https://static.cloudflareinsights.com",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://unpkg.com https://static.cloudflareinsights.com https://*.contentsquare.net",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' blob: https://fonts.gstatic.com",
-    "img-src 'self' data: blob:",
-    "connect-src 'self' https://unpkg.com https://cloudflareinsights.com",
+    "img-src 'self' data: blob: https://*.contentsquare.net",
+    "connect-src 'self' https://unpkg.com https://cloudflareinsights.com https://*.contentsquare.net",
     "frame-ancestors 'self'",
     "base-uri 'self'",
     "object-src 'none'"
