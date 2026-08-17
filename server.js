@@ -27,6 +27,15 @@ const MIME = {
   '.txt':  'text/plain; charset=utf-8'
 };
 
+// Documentación y archivos de configuración: viven en el repo para que
+// quien despliegue los lea, pero no son parte del sitio y no deben poder
+// pedirse por HTTP. Se tratan igual que una ruta inexistente (mismo 404 /
+// fallback a index.html) para no revelar que existen.
+const DENYLIST = new Set([
+  'readme.md', 'despliegue.md', 'package.json', 'package-lock.json',
+  'railway.json', 'procfile', '.gitignore', '.env'
+]);
+
 // Cabeceras de seguridad para todas las respuestas.
 // El framework de la página ejecuta componentes con `new Function(...)`
 // (equivalente a eval), por lo que script-src necesita 'unsafe-eval' y
@@ -71,15 +80,25 @@ function serveFrom(root, urlPath, res) {
     return;
   }
 
+  const serveFallback = () => {
+    fs.readFile(path.join(root, 'index.html'), (e2, d2) => {
+      if (e2) { res.writeHead(404, { ...SECURITY_HEADERS, 'Cache-Control': 'no-store' }); res.end('Not found'); return; }
+      res.writeHead(200, { ...SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
+      res.end(d2);
+    });
+  };
+
+  // Cualquier segmento oculto (.git, .env, ...) o archivo en la lista negra
+  // se trata como si no existiera.
+  const segments = safe.split(/[/\\]/);
+  const basename = path.basename(filePath).toLowerCase();
+  if (segments.some(seg => seg.startsWith('.')) || DENYLIST.has(basename)) {
+    serveFallback();
+    return;
+  }
+
   fs.readFile(filePath, (err, data) => {
-    if (err) {
-      fs.readFile(path.join(root, 'index.html'), (e2, d2) => {
-        if (e2) { res.writeHead(404, { ...SECURITY_HEADERS, 'Cache-Control': 'no-store' }); res.end('Not found'); return; }
-        res.writeHead(200, { ...SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
-        res.end(d2);
-      });
-      return;
-    }
+    if (err) { serveFallback(); return; }
     const ext = path.extname(filePath).toLowerCase();
     // Cache corto para HTML (siempre revalida); cache más largo para
     // assets estáticos (imágenes, íconos, fuentes).
