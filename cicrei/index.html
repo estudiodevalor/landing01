@@ -281,7 +281,7 @@
           </div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1px;background:#d7e5ee">
-          <div style="padding:clamp(22px,4vw,30px);background:#fff"><span style="color:#586f80;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase">Inscripción</span><del style="display:block;margin-top:11px;color:#667887;font-size:.9rem">$3,990 MXN</del><strong style="display:block;margin-top:4px;color:#1676b9;font-size:clamp(2.4rem,7vw,3rem);font-weight:800;line-height:1;letter-spacing:-.055em">$399</strong><small style="display:block;margin-top:8px;color:#586f80;font-size:.85rem">Precio promocional de nuevo ingreso.</small><strong class="cta-pulse" style="display:flex;align-items:center;gap:8px;margin-top:14px;padding:13px 15px;border-radius:12px;background:linear-gradient(135deg,#ff6a00,#e11900);color:#fff;font-size:.98rem;font-weight:900;letter-spacing:.02em;line-height:1.25;text-transform:uppercase;box-shadow:0 8px 22px rgba(225,25,0,.32)"><span aria-hidden="true" style="font-size:1.2rem">⏰</span>¡Válido solo hasta el 7 de septiembre!</strong></div>
+          <div style="padding:clamp(22px,4vw,30px);background:#fff"><span style="color:#586f80;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase">Inscripción</span><del style="display:block;margin-top:11px;color:#667887;font-size:.9rem">$3,990 MXN</del><strong style="display:block;margin-top:4px;color:#1676b9;font-size:clamp(2.4rem,7vw,3rem);font-weight:800;line-height:1;letter-spacing:-.055em">$399</strong><small style="display:block;margin-top:8px;color:#586f80;font-size:.85rem">Precio promocional de nuevo ingreso.</small><strong class="cta-pulse" style="display:flex;align-items:center;gap:8px;margin-top:14px;padding:13px 15px;border-radius:12px;background:linear-gradient(135deg,#ff6a00,#e11900);color:#fff;font-size:.98rem;font-weight:900;letter-spacing:.02em;line-height:1.25;text-transform:uppercase;box-shadow:0 8px 22px rgba(225,25,0,.32)"><span aria-hidden="true" style="font-size:1.2rem">⏰</span>¡Válido solo hasta el 18 de septiembre!</strong></div>
           <div style="padding:clamp(22px,4vw,30px);background:#fff"><span style="color:#586f80;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase">Colegiatura mensual</span><strong style="display:block;margin-top:11px;color:#1676b9;font-size:clamp(2rem,6vw,2.7rem);font-weight:800;line-height:1.05;letter-spacing:-.04em">Becas desde 25% al 75%</strong><span style="display:block;margin-top:8px;color:#102a3e;font-size:clamp(1.6rem,5vw,2.1rem);font-weight:700;line-height:1.25">Agenda tu cita hoy mismo para conocer detalles</span></div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:1px;background:#d7e5ee;border-top:1px solid #d7e5ee">
@@ -406,7 +406,7 @@
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{
-  &quot;waNumber&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;52 33 3314 1588&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;WhatsApp&quot; },
+  &quot;waNumber&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;52 33 2417 4057&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;WhatsApp&quot; },
   &quot;waMessage&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;Hola, quiero agendar mi cita para conocer CICREI&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;WhatsApp&quot; },
   &quot;showStickyCta&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Móvil&quot; }
 }">
@@ -426,7 +426,7 @@ class Component extends DCLogic {
   }
 
   renderVals() {
-    const num = String(this.props.waNumber ?? '52 33 3314 1588').replace(/\D/g, '');
+    const num = String(this.props.waNumber ?? '52 33 2417 4057').replace(/\D/g, '');
     const msg = this.props.waMessage ?? 'Hola, quiero agendar mi cita para conocer CICREI';
     const wa = `https://wa.me/${num}?text=${encodeURIComponent(msg)}`;
     const vw = this.state.vw;
