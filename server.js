@@ -70,7 +70,7 @@ const SECURITY_HEADERS = {
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' blob: https://fonts.gstatic.com",
     "img-src 'self' data: blob: https://*.contentsquare.net https://*.contentsquare.com https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://*.doubleclick.net https://www.google.com https://www.google.com.mx",
-    "connect-src 'self' https://unpkg.com https://cloudflareinsights.com https://*.contentsquare.net https://*.contentsquare.com https://www.googletagmanager.com https://www.google-analytics.com https://*.analytics.google.com https://*.doubleclick.net https://www.google.com",
+    "connect-src 'self' https://unpkg.com https://cloudflareinsights.com https://*.contentsquare.net https://*.contentsquare.com https://www.googletagmanager.com https://www.google-analytics.com https://*.analytics.google.com https://*.doubleclick.net https://www.googleadservices.com https://www.google.com https://www.google.com.mx",
     "worker-src 'self' blob:",
     "frame-src 'self' https://*.doubleclick.net https://www.googletagmanager.com",
     "frame-ancestors 'self'",
