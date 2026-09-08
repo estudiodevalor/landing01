@@ -49,6 +49,15 @@ const DENYLIST = new Set([
 // results" aunque el tag este bien puesto y midiendo.
 // worker-src se declara aparte porque no hereda de script-src sino de
 // default-src, y el session replay crea workers desde blob:.
+// Google Ads (gtag.js, AW-992279025) tambien reparte su trafico entre
+// varios dominios:
+//   googletagmanager.com   -> gtag/js (el tag base)
+//   googleadservices.com   -> conversion_async.js y /pagead/conversion/
+//   *.doubleclick.net      -> conversion linker y pixel de remarketing
+//   google-analytics.com / *.analytics.google.com -> pings de gtag
+//   google.com / google.com.mx -> pixel de conversion regionalizado
+// frame-src se declara aparte (no hereda de default-src) porque el
+// conversion linker inserta un iframe oculto de td.doubleclick.net.
 const SECURITY_HEADERS = {
   'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
   'X-Content-Type-Options': 'nosniff',
@@ -57,12 +66,13 @@ const SECURITY_HEADERS = {
   'Permissions-Policy': 'geolocation=(), camera=(), microphone=(), payment=()',
   'Content-Security-Policy': [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://unpkg.com https://static.cloudflareinsights.com https://*.contentsquare.net https://*.contentsquare.com",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://unpkg.com https://static.cloudflareinsights.com https://*.contentsquare.net https://*.contentsquare.com https://www.googletagmanager.com https://www.googleadservices.com https://*.doubleclick.net",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' blob: https://fonts.gstatic.com",
-    "img-src 'self' data: blob: https://*.contentsquare.net https://*.contentsquare.com",
-    "connect-src 'self' https://unpkg.com https://cloudflareinsights.com https://*.contentsquare.net https://*.contentsquare.com",
+    "img-src 'self' data: blob: https://*.contentsquare.net https://*.contentsquare.com https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://*.doubleclick.net https://www.google.com https://www.google.com.mx",
+    "connect-src 'self' https://unpkg.com https://cloudflareinsights.com https://*.contentsquare.net https://*.contentsquare.com https://www.googletagmanager.com https://www.google-analytics.com https://*.analytics.google.com https://*.doubleclick.net https://www.google.com",
     "worker-src 'self' blob:",
+    "frame-src 'self' https://*.doubleclick.net https://www.googletagmanager.com",
     "frame-ancestors 'self'",
     "base-uri 'self'",
     "object-src 'none'"
