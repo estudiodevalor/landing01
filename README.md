@@ -4,9 +4,14 @@
 > Ahí está en qué servicio de Railway publica este repo, cómo verificar un cambio en
 > producción, y por qué la CSP bloquea los scripts de terceros que no estén en su lista.
 
-Sitio estático listo para publicar en **Railway** desde **GitHub**. El HTML es
-autocontenido: las imágenes y fuentes ya están incrustadas, así que no hay dependencias
-externas que instalar para que el sitio se vea.
+Sitio estático listo para publicar en **Railway** desde **GitHub**, sin dependencias que
+instalar.
+
+> **La home (`index.html` + `img/`) no se edita aquí.** Su fuente es la plantilla
+> `sitios/edv/` del repo `estudiodevalor/edv-landings` (CIC-158). Se cambia allá, se corre
+> `python build.py edv` y se copia `dist/edv/` (index.html e `img/`) a este repo.
+> El primer borrador (la home anterior, de julio de 2026) queda en el historial de git
+> (commit `4b237e0`) y respaldado en la PC de Jorge.
 
 Este repo publica **dos sitios** desde un mismo servidor: la home de Estudio de Valor
 (`index.html`) y la landing de CICREI (carpeta `cicrei/`, visible en
@@ -22,7 +27,8 @@ Este repo publica **dos sitios** desde un mismo servidor: la home de Estudio de 
 
 | Archivo          | Para qué sirve                                                        |
 |------------------|----------------------------------------------------------------------|
-| `index.html`     | La home de Estudio de Valor, autocontenida (foto + fuentes incrustadas). |
+| `index.html`     | La home de Estudio de Valor (generada desde `edv-landings`, ver arriba). |
+| `img/`           | Imágenes, logos, favicon y vista previa para redes de la home.        |
 | `cicrei/`        | La landing de Preparatoria CICREI, servida en `/cicrei`.             |
 | `DESPLIEGUE.md`  | Cómo publicar, dónde vive en Railway y la trampa de la CSP.          |
 | `server.js`      | Servidor web mínimo en Node, sin dependencias. Lee el puerto de Railway. |
@@ -95,9 +101,7 @@ Railway vuelve a desplegar automáticamente con cada `push`.
 
 ## Notas
 
-- El botón **"Responde las 10 preguntas"** ya está conectado al formulario de Google
-  (`https://forms.gle/Xxppw56AHtbfJM8f7`) y abre en una pestaña nueva. Para cambiarlo,
-  edita el archivo fuente y vuelve a generar `index.html`.
+- Todos los botones de la home abren WhatsApp (`wa.me/523335767342`) y llevan `data-cta`
+  para medir clics cuando se instale la analítica.
 - El diseño es **mobile-first y responsivo** (móvil → tablet → escritorio), con maquetación
   fluida que se adapta a cualquier ancho de pantalla.
-- La foto de Jorge ya viene recortada e incrustada; no necesitas subirla por separado.
