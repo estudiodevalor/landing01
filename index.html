@@ -115,9 +115,12 @@ section{padding:var(--sec) 0}
 .why div{background:#fff;padding:24px}
 .why b{display:block;font:500 13px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--g4);margin-bottom:10px}
 .why p{font:400 18px/1.4 var(--f-display);letter-spacing:-.01em;color:var(--g8)}
-.why .us{background:var(--sec-d);box-shadow:inset 4px 0 0 var(--orange)}
+.why .us{background:var(--btn);box-shadow:inset 0 4px 0 var(--orange)}
 .why .us b{color:var(--g3)}
 .why .us p{color:#fff}
+.why-t{font:500 22px/1.2 var(--f-display);margin:0 0 16px}
+.why p.rp{font:400 17px/1.45 var(--f-body);letter-spacing:0;color:var(--g5)}
+.why .us p.rp{font:500 19px/1.4 var(--f-display);letter-spacing:-.01em;color:#fff}
 
 /* 04 · el caso: gráfica de barras */
 .case .grid{display:grid;gap:40px;align-items:center}
@@ -239,7 +242,7 @@ footer{background:var(--sec-d2);color:var(--g3);font-size:14px;padding:56px 0 ca
   .hero .cta{flex-direction:row;align-items:center}
   .stats{grid-template-columns:repeat(4,1fr)}
   .flow{grid-template-columns:repeat(2,1fr)}
-  .why{grid-template-columns:repeat(3,1fr)}
+  .why{grid-template-columns:1fr 1fr 1.25fr}
   .final h2{font-size:50px}
   .final .cta{flex-direction:row;align-items:center}
   .fgrid{grid-template-columns:1fr 1fr}
@@ -269,6 +272,17 @@ footer{background:var(--sec-d2);color:var(--g3);font-size:14px;padding:56px 0 ca
   .fgrid{grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:48px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* ── Aviso de cookies (CIC-238): nada de medición se carga sin «Aceptar» (aviso de privacidad, sección 10) ── */
+.ck{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0));z-index:60;max-width:560px;margin:0 auto;background:var(--g9);color:#fff;border:1px solid var(--line-d);border-radius:14px;padding:16px 18px;font-size:14px;line-height:1.45;box-shadow:0 10px 30px rgba(0,0,0,.25);display:none}
+.ck.on{display:block}
+.ck p{margin:0 0 12px}
+.ck a{color:var(--g3)}
+.ck .row{display:flex;gap:10px;flex-wrap:wrap}
+.ck button{font:600 12px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;border-radius:10px;padding:12px 18px;min-height:44px;cursor:pointer;border:1px solid var(--line-d);background:transparent;color:#fff}
+.ck button.ok{background:#fff;color:var(--btn);border-color:#fff}
+body.ck-abierto .float{visibility:hidden}
+.legal a{color:inherit;margin-left:14px} .legal a:hover{color:#fff}
 </style>
 </head>
 <body>
@@ -299,7 +313,7 @@ footer{background:var(--sec-d2);color:var(--g3);font-size:14px;padding:56px 0 ca
           <a class="btn btn-white" data-cta="hero" href="https://wa.me/523335767342?text=Hola%20Jorge%2C%20quiero%20mi%20Radiograf%C3%ADa" target="_blank" rel="noopener">Pide tu Radiografía gratis <span class="arr">→</span></a>
           <a class="btn btn-line" href="#precios">Ver precios</a>
         </div>
-        <p class="note small">En 24 horas, por WhatsApp · 100 % en línea</p>
+        <p class="note small">En 24 horas desde que nos cuentas de tu negocio, de lunes a viernes · Por WhatsApp</p>
       </div>
       <aside class="building" aria-label="Ejemplo de cómo se califica un negocio en el Edificio de Valor">
         <div class="cap"><b>Tu Edificio de Valor</b><span class="tagx">Ejemplo</span></div>
@@ -336,10 +350,11 @@ footer{background:var(--sec-d2);color:var(--g3);font-size:14px;padding:56px 0 ca
 <section class="light">
   <div class="wrap">
     <div class="head"><div class="eyebrow">Por qué EDV</div><h2>Tu producto es bueno. El problema es cómo lo entienden.</h2></div>
+    <h3 class="why-t">Resultados esperados:</h3>
     <div class="why">
-      <div><b>La IA</b><p>Escribe más rápido el mismo mensaje.</p></div>
-      <div><b>Una agencia</b><p>Difunde más fuerte el mismo mensaje.</p></div>
-      <div class="us"><b>EDV</b><p>Primero escucha a tus clientes. Después mejora el mensaje.</p></div>
+      <div><b>Con inteligencia artificial</b><p class="rp">Más textos, más rápido. Si el mensaje no convence, sigues compitiendo por precio.</p></div>
+      <div><b>Con una agencia</b><p class="rp">Más gente ve tu mensaje. Si no explica por qué tú, te siguen comparando por precio.</p></div>
+      <div class="us"><b>Con EDV - Estudio de Valor</b><p class="rp">Escuchamos a tus clientes, ajustamos tu oferta, la decimos con sus palabras y dejamos claro cómo entregarla. Cobras por su valor.</p></div>
     </div>
   </div>
 </section>
@@ -350,13 +365,13 @@ footer{background:var(--sec-d2);color:var(--g3);font-size:14px;padding:56px 0 ca
     <div>
       <div class="eyebrow">Caso · CICREI, preparatoria en Zapopan</div>
       <h2 class="testi">Testimonio</h2>
-      <p class="quote">«Pasamos de cobrar $600 pesos a $2,500 por alumno gracias al estudio realizado.»<small>— Gilberto Nava, Director de CICREI</small></p>
+      <p class="quote">«Pudimos triplicar el precio de la colegiatura: de $1,000 a $3,000 al mes.»<small>— Gilberto Nava y Natali Méndez, directores de prepa CICREI</small></p>
       <div class="how">
         <p><b>Qué hicimos:</b> entrevistas con papás, alumnos y equipo de trabajo.</p>
         <p><b>Qué descubrimos:</b> no compraban un certificado rápido; compraban acompañamiento.</p>
       </div>
     </div>
-    <figure class="casepic"><img src="img/caso.webp" alt="Gilberto Nava, Director de CICREI, en su oficina" width="1123" height="1400" loading="lazy"><figcaption><b>«Pudimos cobrar 4 veces más.»</b></figcaption></figure>
+    <figure class="casepic"><img src="img/caso.webp" alt="Gilberto Nava, Director de CICREI, en su oficina" width="1123" height="1400" loading="lazy"><figcaption><b>«Pudimos triplicar el precio.»</b></figcaption></figure>
   </div>
 </section>
 
@@ -369,7 +384,7 @@ footer{background:var(--sec-d2);color:var(--g3);font-size:14px;padding:56px 0 ca
         <span class="badge empty" aria-hidden="true">·</span>
         <h3>Radiografía</h3>
         <p class="what">Cómo te ve el mercado, en una hoja.</p>
-        <div class="price"><div class="pl old ghost" aria-hidden="true"><s>$0</s></div><div class="pl"><b>Gratis</b></div><span class="cond">Hasta el 31 de octubre</span><div class="meta">24 horas · 5 minutos de tu tiempo</div></div>
+        <div class="price"><div class="pl old ghost" aria-hidden="true"><s>$0</s></div><div class="pl"><b>Gratis</b></div><span class="cond">Hasta el 30 de noviembre</span><div class="meta">24 horas, de lunes a viernes · 5 minutos de tu tiempo</div></div>
         <ul>
           <li>Tu página, redes y reseñas, revisadas</li>
           <li>Comparación con 2 competidores</li>
@@ -396,24 +411,24 @@ footer{background:var(--sec-d2);color:var(--g3);font-size:14px;padding:56px 0 ca
         <a class="btn btn-white" data-cta="mapa" href="https://wa.me/523335767342?text=Hola%20Jorge%2C%20quiero%20mi%20Radiograf%C3%ADa" target="_blank" rel="noopener">Quiero mi Mapa <span class="arr">→</span></a>
         <div class="pg seal-in"><div class="seal">100 %</div><div><b>Garantía del Mapa</b><p>100 % de devolución de tu inversión si cualquiera de las partes decide no seguir tras la primera llamada.</p></div></div>
         <details><summary>Todo lo que incluye</summary><ul>
-          <li>Llamada de hasta 60 minutos; nunca llenas formatos</li><li>Calificación de las 12 piezas de tu negocio</li><li>Llamada de entrega con la cotización del Sprint</li><li>Tablero de avance</li></ul></details>
+          <li>Llamada de hasta 60 minutos; nunca llenas formatos</li><li>Calificación de las 13 piezas de tu negocio</li><li>Llamada de entrega con la cotización del Sprint</li><li>Tablero de avance</li></ul></details>
       </article>
 
       <article class="plan">
         <span class="badge empty" aria-hidden="true">·</span>
         <h3>Sprint</h3>
         <p class="what">Tu nueva oferta, construida y funcionando.</p>
-        <div class="price"><div class="pl old"><s>$45,000</s><span>+ IVA</span></div><div class="pl"><b>$18,500</b><span>+ IVA</span></div><span class="cond"><em>Precio fundador</em> por ser caso temprano: con tu testimonio y permiso para documentar tu caso. Limitado al 31 de octubre.</span><div class="meta">5 semanas · unas 3 horas tuyas</div></div>
+        <div class="price"><div class="pl old"><s>$45,000</s><span>+ IVA</span></div><div class="pl"><b>$18,500</b><span>+ IVA</span></div><span class="cond"><em>Precio fundador</em> por ser caso temprano: con tu testimonio y permiso para documentar tu caso. Limitado al 30 de noviembre.</span><div class="meta">5 semanas · unas 3 horas tuyas</div></div>
         <ul>
           <li class="plus">Todo lo del Mapa, y además:</li>
           <li>Tu oferta irresistible y tu página publicada</li>
-          <li>Guion de venta y WhatsApp de tu negocio listos</li>
+          <li>Guion de venta listo</li>
           <li>Medición de visitas, prospectos y cierres</li>
         </ul>
         <a class="btn btn-dark" data-cta="sprint" href="https://wa.me/523335767342?text=Hola%20Jorge%2C%20quiero%20mi%20Radiograf%C3%ADa" target="_blank" rel="noopener">Hablar del Sprint <span class="arr">→</span></a>
         <div class="pg"><b>Garantía del Sprint</b><p>Si después de 2 semanas no estás convencido del avance, te entregamos lo avanzado y solo pagas el 50 % del Sprint. Te quedas con tu oferta replanteada, el feedback ordenado de tus clientes y un plan de trabajo para ponerlo en marcha por tu cuenta.</p></div>
         <details><summary>Todo lo que incluye</summary><ul>
-          <li>Una llamada por semana de hasta 45 minutos</li><li>Respuesta a tus 5 objeciones</li><li>Ficha de cotización que editas tú</li><li>Plan para tus primeras 300 visitas</li><li>2 rondas de ajustes</li></ul></details>
+          <li>Una llamada por semana de hasta 45 minutos</li><li>Respuesta a tus 5 objeciones</li><li>Ficha de cotización que editas tú</li><li>Plan para tus primeras 300 visitas</li><li>Una ronda de cambios por semana</li></ul></details>
       </article>
     </div>
     <div class="after-plans">
@@ -465,9 +480,9 @@ footer{background:var(--sec-d2);color:var(--g3);font-size:14px;padding:56px 0 ca
     <h2>¿Quieres saber por qué no te compran?</h2>
     <div class="cta">
       <a class="btn btn-white" data-cta="final" href="https://wa.me/523335767342?text=Hola%20Jorge%2C%20quiero%20mi%20Radiograf%C3%ADa" target="_blank" rel="noopener">Pide tu Radiografía gratis <span class="arr">→</span></a>
-      <span class="small">En 24 horas, por WhatsApp</span>
+      <span class="small">En 24 horas desde que nos cuentas de tu negocio, de lunes a viernes</span>
     </div>
-    <p class="fund"><b>Precio fundador del Sprint: $18,500 + IVA</b> hasta el 31 de octubre.</p>
+    <p class="fund"><b>Precio fundador del Sprint: $18,500 + IVA</b> hasta el 30 de noviembre.</p>
   </div>
 </section>
 
@@ -477,23 +492,50 @@ footer{background:var(--sec-d2);color:var(--g3);font-size:14px;padding:56px 0 ca
   <div class="wrap fgrid">
     <div class="fbrand">
       <img src="img/lockup-negativo.png" alt="EDV - Estudio de Valor" width="134" height="72">
-      <p>Encontramos por qué tus clientes no te compran y lo convertimos en una oferta que sí se vende.</p>
+      <p>Escuchamos a tus clientes y lo convertimos en una oferta que vende.</p>
     </div>
     <nav class="fcol" aria-label="Secciones"><h4>La página</h4><a href="#como">Cómo funciona</a><a href="#caso">Caso</a><a href="#precios">Precios</a><a href="#quien">Quién está detrás</a></nav>
     <div class="fcol"><h4>Contacto</h4><a data-cta="pie" href="https://wa.me/523335767342?text=Hola%20Jorge%2C%20quiero%20mi%20Radiograf%C3%ADa" target="_blank" rel="noopener">WhatsApp <span class="arr">→</span></a><span>Atención por WhatsApp y videollamada</span><span>100 % en línea</span><span>Zapopan, Jalisco, México</span></div>
     <div class="fcol"><h4>Cómo trabajamos</h4><span>Precios publicados, en pesos + IVA</span><span>Garantía del 100 % en el Mapa de Valor</span><span>Solo 4 Mapas al mes</span></div>
   </div>
-  <div class="wrap legal"><span>© 2026 EDV - Estudio de Valor. Todos los derechos reservados.</span></div>
+  <div class="wrap legal"><span>© 2026 EDV - Estudio de Valor. Todos los derechos reservados.</span><a href="aviso-de-privacidad/">Aviso de privacidad</a><a href="#" data-cookies>Cookies</a></div>
 </footer>
+
+<div class="ck" id="cookies" role="dialog" aria-label="Aviso de cookies">
+  <p>Usamos cookies para contar las visitas y mejorar nuestros anuncios en Google, Facebook e Instagram. Solo si las aceptas. <a href="aviso-de-privacidad/#10">Aviso de privacidad</a></p>
+  <div class="row"><button class="ok" type="button" data-ck="si">Aceptar</button><button type="button" data-ck="no">Rechazar</button></div>
+</div>
 
 <a class="float" data-cta="flotante" href="https://wa.me/523335767342?text=Hola%20Jorge%2C%20quiero%20mi%20Radiograf%C3%ADa" target="_blank" rel="noopener">Radiografía gratis<span class="arr">→</span></a>
 
 <script>
 document.querySelectorAll('[data-cta]').forEach(function(a){a.addEventListener('click',function(){
-  if(window.gtag){gtag('event','click_whatsapp',{boton:a.dataset.cta});}
+  if(window.gtag){gtag('event','click_whatsapp',{boton:a.dataset.cta});} if(window.fbq){fbq('track','Contact');}
 });});
 var f=document.querySelector('.float'),h=document.querySelector('.hero');
 if('IntersectionObserver' in window){new IntersectionObserver(function(e){f.classList.toggle('on',!e[0].isIntersecting);}).observe(h);}else{f.classList.add('on');}
+
+/* Medición (CIC-238). Los identificadores se llenan cuando existan las cuentas; vacíos, no se carga nada.
+   Nada se carga antes de «Aceptar»: es un uso que necesita permiso (aviso de privacidad, secciones 3 y 10). */
+var MEDICION={ga:'', ads:'', meta:''};   // G-XXXXXXX · AW-XXXXXXX · número del píxel de Meta
+function mide(){
+  var id=MEDICION.ga||MEDICION.ads;
+  if(id){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+id;document.head.appendChild(s);
+    window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments);};gtag('js',new Date());
+    if(MEDICION.ga){gtag('config',MEDICION.ga);} if(MEDICION.ads){gtag('config',MEDICION.ads);}}
+  if(MEDICION.meta){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init',MEDICION.meta);fbq('track','PageView');}
+}
+var ck=document.getElementById('cookies');
+function lee(){try{return localStorage.getItem('edv-cookies');}catch(e){return null;}}
+function abre(){ck.classList.add('on');document.body.classList.add('ck-abierto');}
+function cierra(){ck.classList.remove('on');document.body.classList.remove('ck-abierto');}
+var antes=lee();
+if(antes==='si'){mide();}else if(!antes){abre();}
+ck.querySelectorAll('[data-ck]').forEach(function(b){b.addEventListener('click',function(){
+  var v=b.dataset.ck; try{localStorage.setItem('edv-cookies',v);}catch(e){}
+  cierra(); if(v==='si'&&antes!=='si'){mide();} if(v==='no'&&antes==='si'){location.reload();} antes=v;
+});});
+document.querySelectorAll('[data-cookies]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();abre();});});
 </script>
 </body>
 </html>

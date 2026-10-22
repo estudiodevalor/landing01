@@ -67,11 +67,11 @@ const SECURITY_HEADERS = {
   'Permissions-Policy': 'geolocation=(), camera=(), microphone=(), payment=()',
   'Content-Security-Policy': [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://unpkg.com https://static.cloudflareinsights.com https://*.contentsquare.net https://*.contentsquare.com https://www.googletagmanager.com https://www.googleadservices.com https://*.doubleclick.net",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://unpkg.com https://static.cloudflareinsights.com https://*.contentsquare.net https://*.contentsquare.com https://www.googletagmanager.com https://www.googleadservices.com https://*.doubleclick.net https://connect.facebook.net",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' blob: https://fonts.gstatic.com",
-    "img-src 'self' data: blob: https://*.contentsquare.net https://*.contentsquare.com https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://*.doubleclick.net https://www.google.com https://www.google.com.mx",
-    "connect-src 'self' https://unpkg.com https://cloudflareinsights.com https://*.contentsquare.net https://*.contentsquare.com https://www.googletagmanager.com https://www.google-analytics.com https://*.analytics.google.com https://*.doubleclick.net https://www.googleadservices.com https://www.google.com https://www.google.com.mx",
+    "img-src 'self' data: blob: https://*.contentsquare.net https://*.contentsquare.com https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://*.doubleclick.net https://www.google.com https://www.google.com.mx https://www.facebook.com",
+    "connect-src 'self' https://unpkg.com https://cloudflareinsights.com https://*.contentsquare.net https://*.contentsquare.com https://www.googletagmanager.com https://www.google-analytics.com https://*.analytics.google.com https://*.doubleclick.net https://www.googleadservices.com https://www.google.com https://www.google.com.mx https://www.facebook.com https://connect.facebook.net",
     "worker-src 'self' blob:",
     "frame-src 'self' https://*.doubleclick.net https://www.googletagmanager.com",
     "frame-ancestors 'self'",
@@ -137,7 +137,14 @@ const server = http.createServer((req, res) => {
       return;
     }
 
-    if (urlPath === '/' || urlPath === '') urlPath = '/index.html';
+    // Páginas en subcarpeta (p. ej. /aviso-de-privacidad/, CIC-238): "/x/" sirve
+    // "x/index.html" y "/x" sin slash final redirige a "/x/", igual que /cicrei.
+    if (urlPath.endsWith('/')) urlPath += 'index.html';
+    else if (!path.extname(urlPath) && path.join(ROOT, urlPath).startsWith(ROOT) && fs.existsSync(path.join(ROOT, urlPath, 'index.html'))) {
+      res.writeHead(301, { ...SECURITY_HEADERS, Location: urlPath + '/' });
+      res.end();
+      return;
+    }
     serveFrom(ROOT, urlPath, res);
   } catch (e) {
     res.writeHead(500, SECURITY_HEADERS);
