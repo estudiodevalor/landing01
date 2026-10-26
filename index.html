@@ -124,7 +124,6 @@ section{padding:var(--sec) 0}
 
 /* 04 · el caso: gráfica de barras */
 .case .grid{display:grid;gap:40px;align-items:center}
-.case .grid.solo{max-width:760px}
 .casepic{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:4/5;max-width:440px;background:var(--card-d)}
 .casepic img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
 .casepic figcaption{position:absolute;left:14px;bottom:14px;right:14px;background:rgba(17,17,17,.88);backdrop-filter:blur(6px);border-left:3px solid var(--orange);border-radius:4px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
@@ -261,7 +260,6 @@ footer{background:var(--sec-d2);color:var(--g3);font-size:14px;padding:56px 0 ca
   .flow{grid-template-columns:repeat(4,1fr)}
   .flow .step:not(:last-child)::after{content:"";position:absolute;top:46px;right:-15px;width:16px;height:2px;background:var(--orange)}
   .case .grid{grid-template-columns:1fr 1fr;gap:72px}
-  .case .grid.solo{grid-template-columns:1fr}
   .plans{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(8,auto);column-gap:16px;row-gap:0}
   .plan{display:grid;grid-template-rows:subgrid;grid-row:span 8;align-content:start}
   .pl.ghost{display:flex;visibility:hidden}
@@ -362,17 +360,18 @@ body.ck-abierto .float{visibility:hidden}
 </section>
 
 <!-- 04 · el caso (gráfica) -->
-<!-- Caso sin nombre, cita, cifras ni foto hasta tener el permiso escrito del cliente (CIC-235, pieza 8). La versión completa: commit 1c4760f. -->
 <section class="graphite case" id="caso">
-  <div class="wrap grid solo">
+  <div class="wrap grid">
     <div>
-      <div class="eyebrow">Caso · Una preparatoria en Zapopan</div>
-      <h2 class="testi">Lo que escuchamos</h2>
+      <div class="eyebrow">Caso · CICREI, preparatoria en Zapopan</div>
+      <h2 class="testi">Testimonio</h2>
+      <p class="quote">«Pudimos triplicar el precio de la colegiatura: de $1,000 a $3,000 al mes.»<small>— Gilberto Nava y Natali Méndez, directores de prepa CICREI</small></p>
       <div class="how">
         <p><b>Qué hicimos:</b> entrevistas con papás, alumnos y equipo de trabajo.</p>
         <p><b>Qué descubrimos:</b> no compraban un certificado rápido; compraban acompañamiento.</p>
       </div>
     </div>
+    <figure class="casepic"><img src="img/caso.webp?v=a3d39175" alt="Gilberto Nava, Director de CICREI, en su oficina" width="1123" height="1400" loading="lazy"><figcaption><b>«Pudimos triplicar el precio.»</b></figcaption></figure>
   </div>
 </section>
 
