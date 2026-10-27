@@ -85,13 +85,15 @@ section{padding:var(--sec) 0}
 .building .cap{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
 .building .cap b{font:500 15px/1 var(--f-display)}
 .tagx{font:500 11px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--g4);border:1px solid var(--line-d);border-radius:3px;padding:5px 7px}
-.lvl{display:grid;grid-template-columns:86px 1fr 38px;gap:10px;align-items:center;padding:11px 0;border-top:1px solid var(--line-d);font-size:13px}
-.lvl span:first-child{color:var(--g3)}
-.sq{display:flex;gap:3px}
-.sq i{width:100%;max-width:14px;aspect-ratio:1;background:#555555;border-radius:2px}
-.sq i.on{background:#fff}
-.sq i.hi{background:var(--orange)}
-.lvl b{font:500 13px/1 var(--f-display);text-align:right}
+.q7 .cap b{line-height:1.3}
+.q7 .q{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line-d);font-size:14px;color:#fff}
+.q7 .d{flex:none;width:14px;height:14px;border-radius:50%;border:1.5px solid #fff}
+.q7 .d.si{background:#fff}
+.q7 .d.me{background:linear-gradient(90deg,#fff 50%,transparent 50%)}
+.q7 .d.no{border-color:var(--orange)}
+.q7 .ley{display:flex;gap:16px;margin-top:12px;font-size:12px;color:var(--g4)}
+.q7 .ley span{display:inline-flex;align-items:center;gap:6px}
+.q7 .ley .d{width:10px;height:10px;border-width:1.2px}
 .building .foot{margin-top:12px;font-size:13px;color:var(--g3)}
 
 /* cifras bajo el héroe */
@@ -135,6 +137,10 @@ section{padding:var(--sec) 0}
 @media (min-width:1040px){.testi{font-size:88px}}
 .case .how{margin-top:26px;display:grid;gap:10px;font-size:15px;color:var(--g3)}
 .case .how b{color:#fff;font-weight:500}
+.case .logos{display:flex;flex-wrap:wrap;align-items:center;gap:20px 40px;margin:-6px 0 48px}
+.case .logos span{font-size:13px;color:var(--g3);flex-basis:100%}
+.case .logos img{height:30px;width:auto;opacity:.92}
+.case .grid+.grid{margin-top:72px;padding-top:72px;border-top:1px solid var(--line-d)}
 
 /* 05 · precios (Stripe) */
 .plans{display:grid;gap:16px}
@@ -260,6 +266,7 @@ footer{background:var(--sec-d2);color:var(--g3);font-size:14px;padding:56px 0 ca
   .flow{grid-template-columns:repeat(4,1fr)}
   .flow .step:not(:last-child)::after{content:"";position:absolute;top:46px;right:-15px;width:16px;height:2px;background:var(--orange)}
   .case .grid{grid-template-columns:1fr 1fr;gap:72px}
+  .case .grid.rev>figure{order:-1}
   .plans{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(8,auto);column-gap:16px;row-gap:0}
   .plan{display:grid;grid-template-rows:subgrid;grid-row:span 8;align-content:start}
   .pl.ghost{display:flex;visibility:hidden}
@@ -294,7 +301,7 @@ body.ck-abierto .float{visibility:hidden}
 <header class="top">
   <div class="wrap">
     <a class="logo" href="#inicio" aria-label="EDV - Estudio de Valor"><img src="img/logo.png" alt="EDV - Estudio de Valor" width="120" height="48"></a>
-    <nav aria-label="Secciones"><a href="#como">Cómo funciona</a><a href="#caso">Caso</a><a href="#precios">Precios</a><a href="#quien">Quién está detrás</a></nav>
+    <nav aria-label="Secciones"><a href="#como">Cómo funciona</a><a href="#casos">Casos</a><a href="#precios">Precios</a><a href="#quien">Quién está detrás</a></nav>
     <a class="btn btn-dark" data-cta="barra" href="https://wa.me/523335767342?text=Hola%20Jorge%2C%20quiero%20mi%20Radiograf%C3%ADa" target="_blank" rel="noopener">Radiografía gratis <span class="arr">→</span></a>
   </div>
 </header>
@@ -306,7 +313,7 @@ body.ck-abierto .float{visibility:hidden}
   <div class="wrap">
     <div class="grid">
       <div>
-        <div class="eyebrow">Para PyMEs que ya facturan</div>
+        <div class="eyebrow">Para PyMEs que ya facturan y compiten por precio</div>
         <h1>Deja de competir por precio y <em>cobra por valor.</em></h1>
         <p class="lead">Escuchamos a tus clientes y lo convertimos en una oferta que <strong style="color:#fff;font-weight:500">vende</strong>.</p>
         <div class="cta">
@@ -315,13 +322,17 @@ body.ck-abierto .float{visibility:hidden}
         </div>
         <p class="note small">En 24 horas desde que nos cuentas de tu negocio, de lunes a viernes · Por WhatsApp</p>
       </div>
-      <aside class="building" aria-label="Ejemplo de cómo se califica un negocio en el Edificio de Valor">
-        <div class="cap"><b>Tu Edificio de Valor</b><span class="tagx">Ejemplo</span></div>
-        <div class="lvl"><span>Fachada</span><span class="sq"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>2/10</b></div>
-        <div class="lvl"><span>Oferta</span><span class="sq"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>4/10</b></div>
-        <div class="lvl"><span>Promesa</span><span class="sq"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span><b>5/10</b></div>
-        <div class="lvl"><span>Cimientos</span><span class="sq"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="hi"></i><i></i><i></i><i></i></span><b>7/10</b></div>
-        <p class="foot">Casi siempre, lo más débil es lo que se ve.</p>
+      <aside class="building q7" aria-label="Ejemplo de lo que revisa la Radiografía: tu página en las 7 preguntas que se hace tu cliente">
+        <div class="cap"><b>Tu página, en las 7 preguntas de tu cliente</b><span class="tagx">Ejemplo</span></div>
+        <div class="q"><i class="d me"></i>¿Qué es y para quién es?</div>
+        <div class="q"><i class="d me"></i>¿Por qué tú y no otro?</div>
+        <div class="q"><i class="d no"></i>¿Te puedo creer?</div>
+        <div class="q"><i class="d me"></i>¿Cuánto me cuesta?</div>
+        <div class="q"><i class="d si"></i>¿Qué gano si compro hoy?</div>
+        <div class="q"><i class="d si"></i>¿Dónde lo compro?</div>
+        <div class="q"><i class="d me"></i>¿Todo cuadra?</div>
+        <div class="ley"><span><i class="d si"></i>claro</span><span><i class="d me"></i>a medias</span><span><i class="d no"></i>no se ve</span></div>
+        <p class="foot">Casi siempre, lo que falta es decir para quién es.</p>
       </aside>
     </div>
     <div class="stats">
@@ -339,7 +350,7 @@ body.ck-abierto .float{visibility:hidden}
     <div class="head"><div class="eyebrow">Cómo funciona</div><h2>De lo que dicen tus clientes a una oferta que vende.</h2><p class="lead">Te mostramos cómo te perciben hoy, escuchamos a tus clientes de viva voz y, junto contigo, decidimos qué mejorar, lo construimos y lo ponemos a prueba rápido.</p></div>
     <div class="flow">
       <div class="step"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div><h3>Ver</h3><p>Cómo te ve hoy el mercado.</p><span class="lvlname">Radiografía</span></div>
-      <div class="step"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M4 5h16v10H9l-5 4V5z"/><path d="M8 9h8M8 12h5"/></svg></div><h3>Escuchar</h3><p>A tus clientes y a quienes no te compraron.</p><span class="lvlname">Mapa de Valor</span></div>
+      <div class="step"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M4 5h16v10H9l-5 4V5z"/><path d="M8 9h8M8 12h5"/></svg></div><h3>Escuchar</h3><p>A tus clientes, a tu equipo y a quienes no te compraron.</p><span class="lvlname">Mapa de Valor</span></div>
       <div class="step"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/></svg></div><h3>Decidir</h3><p>Qué arreglar primero y cuánto vale.</p><span class="lvlname">Mapa de Valor</span></div>
       <div class="step"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M4 20V10l8-6 8 6v10z"/><path d="M9 20v-6h6v6"/></svg></div><h3>Construir</h3><p>Tu oferta y tu página, funcionando.</p><span class="lvlname">Sprint</span></div>
     </div>
@@ -359,12 +370,16 @@ body.ck-abierto .float{visibility:hidden}
   </div>
 </section>
 
-<!-- 04 · el caso (gráfica) -->
-<section class="graphite case" id="caso">
+<!-- 04 · casos -->
+<section class="graphite case" id="casos">
+  <div class="wrap">
+    <div class="eyebrow">Casos</div>
+    <h2 class="testi">Testimonios</h2>
+    <div class="logos"><span>Empresas que ya escucharon a sus clientes con EDV</span><img src="img/clientes/cicrei.png" alt="CICREI" width="107" height="30"><img src="img/clientes/vaporza.png" alt="Vaporza" width="100" height="30"></div>
+  </div>
   <div class="wrap grid">
     <div>
       <div class="eyebrow">Caso · CICREI, preparatoria en Zapopan</div>
-      <h2 class="testi">Testimonio</h2>
       <p class="quote">«Pudimos triplicar el precio de la colegiatura: de $1,000 a $3,000 al mes.»<small>— Gilberto Nava y Natali Méndez, directores de prepa CICREI</small></p>
       <div class="how">
         <p><b>Qué hicimos:</b> entrevistas con papás, alumnos y equipo de trabajo.</p>
@@ -372,6 +387,17 @@ body.ck-abierto .float{visibility:hidden}
       </div>
     </div>
     <figure class="casepic"><img src="img/caso.webp?v=a3d39175" alt="Gilberto Nava, Director de CICREI, en su oficina" width="1123" height="1400" loading="lazy"><figcaption><b>«Pudimos triplicar el precio.»</b></figcaption></figure>
+  </div>
+  <div class="wrap grid rev">
+    <div>
+      <div class="eyebrow">Caso · Vaporza, control de chinches</div>
+      <p class="quote">«Más que una página, nos ayudó a entender el valor que debemos comunicar.»<small>— MVZ Juan Vidrio, director de Vaporza</small></p>
+      <div class="how">
+        <p><b>Qué hicimos:</b> escuchar a sus clientes, a sus prospectos y a quienes decidieron no comprarles.</p>
+        <p><b>Qué cambió:</b> dejaron de presentar maquinaria y su página habla de lo que de verdad le importa a su cliente.</p>
+      </div>
+    </div>
+    <figure class="casepic"><img src="img/vaporza.webp?v=79ab2d81" alt="MVZ Juan Vidrio, director de Vaporza" width="640" height="640" loading="lazy"></figure>
   </div>
 </section>
 
@@ -383,17 +409,17 @@ body.ck-abierto .float{visibility:hidden}
       <article class="plan">
         <span class="badge empty" aria-hidden="true">·</span>
         <h3>Radiografía</h3>
-        <p class="what">Cómo te ve el mercado, en una hoja.</p>
-        <div class="price"><div class="pl old"><s>$2,000</s><span>+ IVA</span></div><div class="pl"><b>Gratis</b></div><span class="cond"><em>Promoción de octubre:</em> quedan 3 de 5 Radiografías gratis.</span><div class="meta">24 horas, de lunes a viernes · 5 minutos de tu tiempo</div></div>
+        <p class="what">Lo que ve tu cliente cuando llega a tu página.</p>
+        <div class="price"><div class="pl old"><s>$2,000</s><span>+ IVA</span></div><div class="pl"><b>Gratis</b></div><span class="cond"><em>Promoción de octubre:</em> quedan 2 de 5 Radiografías gratis.</span><div class="meta">24 horas, de lunes a viernes · 5 minutos de tu tiempo</div></div>
         <ul>
-          <li>Tu página, redes y reseñas, revisadas</li>
+          <li>Tu página en las 7 preguntas que se hace tu cliente</li>
+          <li>Lo que tienes a tu favor y los huecos en tu mensaje</li>
           <li>Comparación con 2 competidores</li>
-          <li>Lo que haces bien y lo que tu cliente no ve</li>
         </ul>
         <a class="btn btn-dark" data-cta="radiografia" href="https://wa.me/523335767342?text=Hola%20Jorge%2C%20quiero%20mi%20Radiograf%C3%ADa" target="_blank" rel="noopener">Pedir Radiografía <span class="arr">→</span></a>
         <div class="pg empty" aria-hidden="true"></div>
         <details><summary>Todo lo que incluye</summary><ul>
-          <li>Documento de una hoja con la gráfica de tu oferta</li><li>Calificación de las 7 piezas visibles de tu negocio</li><li>Video de recomendaciones</li><li>Llamada de 20 minutos para explicártela</li></ul></details>
+          <li>Documento con gráficas, para compartir con tu equipo</li><li>3 arreglos para esta semana, con o sin nosotros</li><li>Llamada de 20 minutos para explicártela</li></ul></details>
       </article>
 
       <article class="plan pick">
@@ -404,14 +430,14 @@ body.ck-abierto .float{visibility:hidden}
         <ul>
           <li class="plus">Todo lo de la Radiografía, y además:</li>
           <li>1 llamada contigo para escuchar tu oferta de valor</li>
-          <li>3 entrevistas con clientes y 3 con prospectos</li>
+          <li>Al menos 3 entrevistas con tus clientes y 2 con tu equipo</li>
           <li>Mapa con tus oportunidades en orden de prioridad</li>
           <li><span>Tu primer <b class="qw">Quick Win</b>, para implementar el mismo día</span></li>
         </ul>
         <a class="btn btn-white" data-cta="mapa" href="https://wa.me/523335767342?text=Hola%20Jorge%2C%20quiero%20mi%20Radiograf%C3%ADa" target="_blank" rel="noopener">Quiero mi Mapa <span class="arr">→</span></a>
         <div class="pg seal-in"><div class="seal">100 %</div><div><b>Garantía del Mapa</b><p>100 % de devolución de tu inversión si cualquiera de las partes decide no seguir tras la primera llamada.</p></div></div>
         <details><summary>Todo lo que incluye</summary><ul>
-          <li>Llamada de hasta 60 minutos; nunca llenas formatos</li><li>Calificación de las 13 piezas de tu negocio</li><li>Llamada de entrega con la cotización del Sprint</li><li>Tablero de avance</li></ul></details>
+          <li>Llamada de hasta 60 minutos; nunca llenas formatos</li><li>Entrevistas con prospectos que no te compraron, si nos los compartes</li><li>Revisión de tu Edificio de Valor: las 13 piezas que hacen que vendas por valor</li><li>Llamada de entrega con la cotización del Sprint</li><li>Tablero de avance</li></ul></details>
       </article>
 
       <article class="plan">
@@ -494,7 +520,7 @@ body.ck-abierto .float{visibility:hidden}
       <img src="img/lockup-negativo.png" alt="EDV - Estudio de Valor" width="134" height="72">
       <p>Escuchamos a tus clientes y lo convertimos en una oferta que vende.</p>
     </div>
-    <nav class="fcol" aria-label="Secciones"><h4>La página</h4><a href="#como">Cómo funciona</a><a href="#caso">Caso</a><a href="#precios">Precios</a><a href="#quien">Quién está detrás</a></nav>
+    <nav class="fcol" aria-label="Secciones"><h4>La página</h4><a href="#como">Cómo funciona</a><a href="#casos">Casos</a><a href="#precios">Precios</a><a href="#quien">Quién está detrás</a></nav>
     <div class="fcol"><h4>Contacto</h4><a data-cta="pie" href="https://wa.me/523335767342?text=Hola%20Jorge%2C%20quiero%20mi%20Radiograf%C3%ADa" target="_blank" rel="noopener">WhatsApp <span class="arr">→</span></a><span>Atención por WhatsApp y videollamada</span><span>100 % en línea</span><span>Zapopan, Jalisco, México</span></div>
     <div class="fcol"><h4>Cómo trabajamos</h4><span>Precios publicados, en pesos + IVA</span><span>Garantía del 100 % en el Mapa de Valor</span><span>Solo 4 Mapas al mes</span></div>
   </div>
