@@ -6,9 +6,11 @@ const path = require('path');
 
 const PORT = process.env.PORT || 3000;
 const ROOT = __dirname;
-// Landing de preinscripción CICREI, aislada en su propia carpeta y servida
-// bajo /cicrei/ dentro del mismo sitio (mismo dominio, sin proxy externo).
-const CICREI_ROOT = path.join(__dirname, 'cicrei');
+// CIC-270 — la landing de CICREI ya NO se sirve desde aquí: vive en
+// Cloudflare Pages (repo edv-landings-codigo, sitios/cicrei). /cicrei/* redirige
+// con 301 a CICREI_URL. La carpeta cicrei/ se conserva en el repo, sin servirse,
+// por si hay que revertir; se puede borrar cuando el redirect lleve estable.
+const CICREI_URL = 'https://cicrei.estudioedv.com';
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -123,17 +125,19 @@ const server = http.createServer((req, res) => {
   try {
     let urlPath = decodeURIComponent((req.url || '/').split('?')[0]);
 
-    // "/cicrei" sin slash final redirige a "/cicrei/" para que las rutas
-    // relativas del HTML de esa landing (assets/logo-cicrei.png, etc.)
-    // resuelvan contra el subpath y no contra la raíz del dominio.
-    if (urlPath === '/cicrei') {
-      res.writeHead(301, { ...SECURITY_HEADERS, Location: '/cicrei/' });
+    // CIC-270 — la landing de CICREI se mudó a https://cicrei.estudioedv.com
+    // (Cloudflare Pages). Todo lo que llegue a /cicrei y /cicrei/... redirige
+    // con 301 al mismo subpath en el dominio nuevo, CONSERVANDO la query string
+    // (UTM de las campañas, gclid, etc.). El destino siempre empieza por
+    // CICREI_URL, así que un subpath raro (p. ej. "//evil.com") se queda
+    // dentro de ese host; encodeURI evita que un salto de línea decodificado
+    // llegue a la cabecera Location.
+    if (urlPath === '/cicrei' || urlPath.startsWith('/cicrei/')) {
+      const crudo = req.url || '/';
+      const q = crudo.indexOf('?') >= 0 ? crudo.slice(crudo.indexOf('?')) : '';
+      const sub = encodeURI(urlPath.slice('/cicrei'.length) || '/');
+      res.writeHead(301, { ...SECURITY_HEADERS, Location: CICREI_URL + sub + q });
       res.end();
-      return;
-    }
-    if (urlPath === '/cicrei/' || urlPath.startsWith('/cicrei/')) {
-      const sub = urlPath === '/cicrei/' ? '/index.html' : urlPath.slice('/cicrei'.length);
-      serveFrom(CICREI_ROOT, sub, res);
       return;
     }
 
