@@ -1,22 +1,20 @@
 # Despliegue y operación
 
 > Última verificación: **4 de agosto de 2026**.
-> Léelo antes de tocar `cicrei/` o `server.js`.
+> Léelo antes de tocar `server.js`.
 >
-> **CIC-270 (2026-11-06):** `/cicrei/*` ya NO sirve la carpeta `cicrei/`: `server.js` redirige con 301 a `https://cicrei.estudioedv.com` (misma ruta y query string). Los cambios de la landing de CICREI se hacen en `edv-landings-codigo` (`sitios/cicrei`), no aquí. Lo que sigue describe cómo se servía antes y se conserva como referencia de reversión.
+> **CIC-270 (2026-11-06):** `/cicrei/*` ya NO sirve la carpeta `cicrei/`: `server.js` redirige con 301 a `https://cicrei.estudioedv.com` (misma ruta y query string). Los cambios de la landing de CICREI se hacen en `edv-landings-codigo` (`sitios/cicrei`), no aquí. La carpeta `cicrei/` se borró en CIC-272 (sigue en el historial de git, commit `b99a8d4`).
 
 ---
 
 ## Qué publica este repo
 
-Este repo sirve **dos sitios distintos desde un mismo servidor**:
+Este repo sirve **un solo sitio**:
 
 | URL pública | Se sirve desde |
 |---|---|
 | `https://www.estudiodevalor.com/` | `index.html` (raíz del repo) |
-| `https://www.estudiodevalor.com/cicrei/` | carpeta `cicrei/` |
-
-Al cambiar uno, **verifica que el otro siga bien**. Comparten `server.js` y sus cabeceras.
+| `https://www.estudiodevalor.com/cicrei/*` | no se sirve: `server.js` responde 301 a `https://cicrei.estudioedv.com` (misma ruta y query string) |
 
 ### Dónde vive en Railway
 
@@ -41,13 +39,13 @@ El servicio tiene **autodeploy**: un `push` a `main` publica en producción.
 
 ```bash
 # 1. editar lo que corresponda
-#    cicrei/index.html  -> la landing de CICREI
 #    index.html         -> la home de Estudio de Valor
+#    (la landing de CICREI se edita en edv-landings-codigo, sitios/cicrei)
 
 # 2. probar en local ANTES de publicar
 PORT=4021 node server.js
-#    http://localhost:4021/cicrei/   -> landing CICREI
-#    http://localhost:4021/          -> home, debe seguir intacta
+#    http://localhost:4021/          -> home
+#    http://localhost:4021/cicrei/?utm_source=x -> debe dar 301 a https://cicrei.estudioedv.com/?utm_source=x
 
 # 3. publicar
 git add . && git commit -m "..." && git push origin main
@@ -56,7 +54,7 @@ git add . && git commit -m "..." && git push origin main
 El despliegue tarda **1-2 minutos**. Para confirmar en producción:
 
 ```bash
-curl -s "https://www.estudiodevalor.com/cicrei/?cb=$RANDOM" | grep -i "lo-que-agregaste"
+curl -s "https://www.estudiodevalor.com/?cb=$RANDOM" | grep -i "lo-que-agregaste"
 ```
 
 Usa siempre el `?cb=...`: hay Cloudflare delante y una respuesta cacheada te haría creer
@@ -83,8 +81,9 @@ Al agregar cualquier analítica, píxel, chat o A/B testing, añade su dominio e
 | `connect-src` | que pueda enviar datos de vuelta |
 | `img-src` | si usa píxeles de rastreo |
 
-**Ya instalado:** el tag de **Contentsquare** (`76b5ead5ae20f`) está en el `<head>` de
-`cicrei/index.html`. Úsalo como plantilla para el siguiente.
+**Ya instalado:** el tag de **Contentsquare** (`76b5ead5ae20f`) estaba en el `<head>` de la landing de CICREI,
+que ahora vive en `edv-landings-codigo` (`sitios/cicrei`, con su propio `_headers`). La CSP de este
+`server.js` conserva sus dominios por si la home lo necesita.
 
 ### Un proveedor puede usar más de un dominio
 

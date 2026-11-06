@@ -8,8 +8,8 @@ const PORT = process.env.PORT || 3000;
 const ROOT = __dirname;
 // CIC-270 — la landing de CICREI ya NO se sirve desde aquí: vive en
 // Cloudflare Pages (repo edv-landings-codigo, sitios/cicrei). /cicrei/* redirige
-// con 301 a CICREI_URL. La carpeta cicrei/ se conserva en el repo, sin servirse,
-// por si hay que revertir; se puede borrar cuando el redirect lleve estable.
+// con 301 a CICREI_URL. La carpeta cicrei/ se borró en CIC-272; si hay que
+// revertir, está en el historial de git (commit b99a8d4).
 const CICREI_URL = 'https://cicrei.estudioedv.com';
 
 const MIME = {
