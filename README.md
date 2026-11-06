@@ -1,6 +1,6 @@
 # Estudio de Valor — Landing page
 
-> **CIC-270:** la landing de CICREI ya no se sirve desde este repo. Vive en `https://cicrei.estudioedv.com` (Cloudflare Pages, repo `edv-landings-codigo`, `sitios/cicrei`) y `/cicrei/*` aquí redirige con 301, conservando la query string. La carpeta `cicrei/` queda sin servirse, solo por si hay que revertir.
+> **CIC-270:** la landing de CICREI ya no se sirve desde este repo. Vive en `https://cicrei.estudioedv.com` (Cloudflare Pages, repo `edv-landings-codigo`, `sitios/cicrei`) y `/cicrei/*` aquí redirige con 301, conservando la query string. La carpeta `cicrei/` se borró del repo en CIC-272; si hiciera falta revertir, sigue en el historial de git (último commit con ella: `b99a8d4`).
 >
 > **¿Vas a desplegar o a tocar `server.js`? Lee primero [DESPLIEGUE.md](DESPLIEGUE.md).**
 > Ahí está en qué servicio de Railway publica este repo, cómo verificar un cambio en
@@ -15,9 +15,9 @@ instalar.
 > El primer borrador (la home anterior, de julio de 2026) queda en el historial de git
 > (commit `4b237e0`) y respaldado en la PC de Jorge.
 
-Este repo publica **dos sitios** desde un mismo servidor: la home de Estudio de Valor
-(`index.html`) y la landing de CICREI (carpeta `cicrei/`, visible en
-`www.estudiodevalor.com/cicrei`). Al cambiar uno, verifica que el otro siga bien.
+Este repo publica **un solo sitio**: la home de Estudio de Valor (`index.html`) en
+`www.estudiodevalor.com`. La landing de CICREI ya no vive aquí (CIC-270/CIC-272): está en
+`https://cicrei.estudioedv.com` y `www.estudiodevalor.com/cicrei/*` solo redirige con 301.
 
 > Las instrucciones de "Paso 1" y "Paso 2" de más abajo son del montaje inicial de 2026 y
 > se conservan como referencia histórica: el repo y el servicio **ya existen**, no hay que
@@ -31,7 +31,7 @@ Este repo publica **dos sitios** desde un mismo servidor: la home de Estudio de 
 |------------------|----------------------------------------------------------------------|
 | `index.html`     | La home de Estudio de Valor (generada desde `edv-landings`, ver arriba). |
 | `img/`           | Imágenes, logos, favicon y vista previa para redes de la home.        |
-| `cicrei/`        | La landing de Preparatoria CICREI, servida en `/cicrei`.             |
+| `aviso-de-privacidad/` | Aviso de privacidad de la home (CIC-238).                      |
 | `DESPLIEGUE.md`  | Cómo publicar, dónde vive en Railway y la trampa de la CSP.          |
 | `server.js`      | Servidor web mínimo en Node, sin dependencias. Lee el puerto de Railway. |
 | `package.json`   | Define el comando de arranque (`npm start` → `node server.js`).      |
