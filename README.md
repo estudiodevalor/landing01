@@ -1,6 +1,8 @@
 # Estudio de Valor — Landing page
 
-> **¿Vas a desplegar o a tocar `cicrei/`? Lee primero [DESPLIEGUE.md](DESPLIEGUE.md).**
+> **CIC-270:** la landing de CICREI ya no se sirve desde este repo. Vive en `https://cicrei.estudioedv.com` (Cloudflare Pages, repo `edv-landings-codigo`, `sitios/cicrei`) y `/cicrei/*` aquí redirige con 301, conservando la query string. La carpeta `cicrei/` queda sin servirse, solo por si hay que revertir.
+>
+> **¿Vas a desplegar o a tocar `server.js`? Lee primero [DESPLIEGUE.md](DESPLIEGUE.md).**
 > Ahí está en qué servicio de Railway publica este repo, cómo verificar un cambio en
 > producción, y por qué la CSP bloquea los scripts de terceros que no estén en su lista.
 

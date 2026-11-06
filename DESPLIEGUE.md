@@ -2,6 +2,8 @@
 
 > Última verificación: **4 de agosto de 2026**.
 > Léelo antes de tocar `cicrei/` o `server.js`.
+>
+> **CIC-270 (2026-11-06):** `/cicrei/*` ya NO sirve la carpeta `cicrei/`: `server.js` redirige con 301 a `https://cicrei.estudioedv.com` (misma ruta y query string). Los cambios de la landing de CICREI se hacen en `edv-landings-codigo` (`sitios/cicrei`), no aquí. Lo que sigue describe cómo se servía antes y se conserva como referencia de reversión.
 
 ---
 
