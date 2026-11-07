@@ -122,8 +122,10 @@ servicio correcto. Usa la Railway CLI o el MCP de Railway (no leas el token de
 `~/.railway/config.json` a mano):
 
 ```bash
-railway status                       # proyecto, entorno y servicio enlazados a esta carpeta
-railway domain                       # dominios del servicio enlazado
+# Solo lectura y sin enlazar la carpeta (IDs explícitos). Ojo: `railway domain` SIN argumentos
+# CREA un dominio de Railway; no lo uses para consultar.
+railway status --project d742db17-9465-49b2-accc-a58e5eca7ad8 --environment production --json
+railway domain list --project d742db17-9465-49b2-accc-a58e5eca7ad8 --environment production --service web --json
 ```
 
 En el MCP: `list-projects`, `list-services` y `list-domains` (los `customDomains` dicen qué
