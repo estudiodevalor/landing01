@@ -141,3 +141,10 @@ distintas, y cualquier `push` habría reemplazado la landing en vivo por la vers
 
 Se corrigió el 4 de agosto de 2026 sincronizando esa rama con lo que estaba desplegado.
 De ahí la regla de arriba: **el repo es la fuente de verdad, publica por `push`.**
+
+
+## Si un merge no se despliega solo (CIC-271, 2026-11-06)
+
+Entre el 27-oct y el 5-nov Railway dejó de desplegar este servicio al hacer merge a `main`, sin avisar. Se reconectó GitHub en la cuenta de Railway (https://railway.com/account/integrations) y se volvió a conectar la fuente del servicio `web` (`estudiodevalor/landing01`, rama `main`). La app de Railway debe tener este repo en https://github.com/settings/installations → Railway → Configure → Repository access.
+
+**Después de cada merge:** comprobar que aparece un despliegue del SHA del merge (`gh api repos/estudiodevalor/landing01/deployments`). Si no aparece, no esperar: avisar y, si es urgente, desplegar a mano verificando el SHA.
