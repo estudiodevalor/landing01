@@ -118,17 +118,19 @@ declararlo por separado — ya está puesto.
 ## Cómo saber qué servicio sirve un dominio
 
 Si algo no aparece en producción, lo primero es confirmar que estás desplegando en el
-servicio correcto. La consulta global `projects` devuelve *Not Authorized*: hay que
-preguntar proyecto por proyecto. El token está en `~/.railway/config.json`
-(campo `user.accessToken`):
+servicio correcto. Usa la Railway CLI o el MCP de Railway (no leas el token de
+`~/.railway/config.json` a mano):
 
 ```bash
-curl -s https://backboard.railway.com/graphql/v2 \
-  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
-  -d '{"query":"query { project(id: \"<PROJECT_ID>\") { name services { edges { node { name serviceInstances { edges { node { domains { serviceDomains { domain } customDomains { domain } } } } } } } } } }"}'
+# Solo lectura y sin enlazar la carpeta (IDs explícitos). Ojo: `railway domain` SIN argumentos
+# CREA un dominio de Railway; no lo uses para consultar.
+railway status --project d742db17-9465-49b2-accc-a58e5eca7ad8 --environment production --json
+railway domain list --project d742db17-9465-49b2-accc-a58e5eca7ad8 --environment production --service web --json
 ```
 
-Los `customDomains` son la respuesta: ahí se ve qué dominio público apunta a cada servicio.
+En el MCP: `list-projects`, `list-services` y `list-domains` (los `customDomains` dicen qué
+dominio público apunta a cada servicio). Aquí: proyecto `hospitable-reprieve`, servicio `web`,
+dominio personalizado `www.estudiodevalor.com`.
 
 ---
 
@@ -147,4 +149,4 @@ De ahí la regla de arriba: **el repo es la fuente de verdad, publica por `push`
 
 Entre el 27-oct y el 5-nov Railway dejó de desplegar este servicio al hacer merge a `main`, sin avisar. Se reconectó GitHub en la cuenta de Railway (https://railway.com/account/integrations) y se volvió a conectar la fuente del servicio `web` (`estudiodevalor/landing01`, rama `main`). La app de Railway debe tener este repo en https://github.com/settings/installations → Railway → Configure → Repository access.
 
-**Después de cada merge:** comprobar que aparece un despliegue del SHA del merge (`gh api repos/estudiodevalor/landing01/deployments`). Si no aparece, no esperar: avisar y, si es urgente, desplegar a mano verificando el SHA.
+**Después de cada merge:** comprobar que aparece un despliegue del SHA del merge (`gh api repos/estudiodevalor/landing01/deployments`). Si no aparece, no esperar: avisar y, si es urgente, desplegar a mano con `railway up` **desde un clon limpio del commit mergeado** (`git clone`, `git checkout <SHA>`, sin cambios locales): verificar solo el SHA no garantiza que `railway up` no suba archivos locales sin commitear.
