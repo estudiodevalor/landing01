@@ -37,6 +37,8 @@ independiente de la landing de CICREI. No confundas los dos al desplegar.
 
 El servicio tiene **autodeploy**: un `push` a `main` publica en producción.
 
+> Si un merge a `main` no genera despliegue en Railway, revisa que la fuente del servicio `web` tenga la rama `main` (`get-service-config` debe mostrar `source.branch: main`). Sin rama, no existe el disparador de GitHub (CIC-271, 2026-11-07).
+
 ```bash
 # 1. editar lo que corresponda
 #    index.html         -> la home de Estudio de Valor
