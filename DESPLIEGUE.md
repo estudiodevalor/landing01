@@ -37,7 +37,11 @@ independiente de la landing de CICREI. No confundas los dos al desplegar.
 
 El servicio tiene **autodeploy**: un `push` a `main` publica en producción.
 
-> Si un merge a `main` no genera despliegue en Railway, revisa que la fuente del servicio `web` tenga la rama `main` (`get-service-config` debe mostrar `source.branch: main`). Sin rama, no existe el disparador de GitHub (CIC-271, 2026-11-07).
+> Si un merge a `main` no genera despliegue en Railway, revisa en este orden (CIC-271, 2026-11-12):
+>
+> 1. La instalación de **Railway App** en GitHub (https://github.com/settings/installations) debe incluir `landing01` en *Repository access*. Si no está, Railway no puede leer el repo: el panel del servicio muestra «Could not load branches» y «Auto deploy unavailable».
+> 2. En Railway, *Settings → Source* del servicio `web` debe mostrar la rama `main` y «Auto deploys when pushed to GitHub». Si dice «Auto deploy is disabled», actívalo con el botón de esa fila.
+> 3. `get-service-config` debe mostrar `source.branch: main`.
 
 ```bash
 # 1. editar lo que corresponda
